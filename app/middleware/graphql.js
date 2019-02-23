@@ -36,6 +36,7 @@ function graphiqlKoa(options) {
 module.exports = (_, app) => {
   const options = app.config.graphql;
   const graphQLRouter = options.router;
+  const opts = options.opts || {};
   let graphiql = true;
 
   if (options.graphiql === false) {
@@ -59,6 +60,7 @@ module.exports = (_, app) => {
       return graphqlKoa({
         schema: app.schema,
         context: ctx,
+        ...opts
       })(ctx);
     }
     await next();
